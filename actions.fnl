@@ -10,10 +10,9 @@
   (hs.appfinder.appFromName nm))
 
 (fn actions.activate [nm1 nm2]
-  (fn []
-    (let [app (or (get-app nm1) (get-app nm2))]
-      (when app
-        (app:activate)))))
+  (let [app (or (get-app nm1) (get-app nm2))]
+    (when app
+      (app:activate))))
 
 (fn with-ax-hotfix [app f]
   (let [ax-app (hs.axuielement.applicationElement app)
@@ -25,32 +24,30 @@
       (tset ax-app :AXEnhancedUserInterface true))))
 
 (fn actions.move-to [quad]
-  (fn []
-    (let [win (hs.window.focusedWindow)]
-      (with-ax-hotfix
-        (win:application)
-        #(win:moveToUnit quad)))))
+  (let [win (hs.window.focusedWindow)]
+    (with-ax-hotfix
+      (win:application)
+      #(win:moveToUnit quad))))
+
+(fn actions.move-window-to-next-screen [win]
+  (with-ax-hotfix
+    (win:application)
+    #(win:moveToScreen (: (win:screen) :next))))
 
 (fn actions.move-to-next-screen []
-  (fn []
-    (let [win (hs.window.focusedWindow)]
-      (with-ax-hotfix
-        (win:application)
-        #(win:moveToScreen (: (win:screen) :next))))))
+  (actions.move-window-to-next-screen (hs.window.focusedWindow)))
 
 (fn actions.set-karabiner-profile! [nm]
-  (fn []
-    (hs.execute (.. "'/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli' --select-profile '" nm "'"))
-    (hs.alert.show (.. "Set keymap to '" nm "'"))))
+  (hs.execute (.. "'/Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli' --select-profile '" nm "'"))
+  (hs.alert.show (.. "Set keymap to '" nm "'")))
 
 (fn actions.toggle-mode [mode]
-  (fn []
-    (if mode.active?
-      (do
-        (mode:exit)
-        (tset mode :active? false))
-      (do
-        (mode:enter)
-        (tset mode :active? true)))))
+  (if mode.active?
+    (do
+      (mode:exit)
+      (tset mode :active? false))
+    (do
+      (mode:enter)
+      (tset mode :active? true))))
 
 actions
