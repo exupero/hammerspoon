@@ -45,6 +45,10 @@
 (set-hotkey-bindings! keymap)
 (set-hotkey-bindings! machine.keymap)
 
+(local KSheet (hs.loadSpoon :KSheet))
+(KSheet:init)
+(KSheet:bindHotkeys {:toggle [hyper :k]})
+
 (local VimMode (hs.loadSpoon :VimMode))
 (doto (VimMode:new)
   (: :bindHotKeys {:enter [[:ctrl] ";"]})
