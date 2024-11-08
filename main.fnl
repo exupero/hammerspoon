@@ -33,6 +33,7 @@
 (local VimMode (hs.loadSpoon :VimMode))
 (doto (VimMode:new)
   (: :bindHotKeys {:enter [[] :escape]})
+  (: :disableForApp :Obsidian)
   (: :disableForApp :iTerm2)
   (: :disableForApp :Terminal))
 
