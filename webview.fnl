@@ -1,5 +1,9 @@
 (local webview {})
 
+(local scittle-html
+  (with-open [f (io.open "wv.html" :r)]
+    (when f (f:read :*a))))
+
 (fn webview.scittle [script]
   (let [id (.. "id" (: (hs.host.uuid) :gsub "-" ""))
         screen (. (hs.screen.allScreens) 2)
@@ -11,26 +15,7 @@
           (: :windowStyle (bor hs.webview.windowMasks.titled hs.webview.windowMasks.closable hs.webview.windowMasks.HUD))
           (: :deleteOnClose true)
           (: :allowTextEntry true)
-          (: :html (string.format "<html>
-<head>
-<meta charset=\"UTF-8\" />
-<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
-<link rel=\"shortcut icon\" href=\"data:,\" />
-<link rel=\"apple-touch-icon\" href=\"data:,\" />
-<script crossorigin src=\"https://unpkg.com/react@17/umd/react.production.min.js\"></script>
-<script crossorigin src=\"https://unpkg.com/react-dom@17/umd/react-dom.production.min.js\"></script>
-<script src=\"https://cdn.jsdelivr.net/npm/scittle@0.6.17/dist/scittle.js\" type=\"application/javascript\"></script>
-<script src=\"https://cdn.jsdelivr.net/npm/scittle@0.6.17/dist/scittle.reagent.js\" type=\"application/javascript\"></script>
-<script src=\"https://cdn.jsdelivr.net/npm/scittle@0.6.17/dist/scittle.cljs-ajax.js\" type=\"application/javascript\"></script>
-</head>
-<body>
-<div id=\"app\"></div>
-<script type=\"application/javascript\">
-function sendData(data) { webkit.messageHandlers.%s.postMessage(data) }
-</script>
-<script type=\"application/x-scittle\">%s</script>
-</body>
-</html>" id script))
+          (: :html (string.format scittle-html id script))
           (: :show))
       uc)))
 
