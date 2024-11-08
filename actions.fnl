@@ -12,7 +12,8 @@
 (fn actions.activate [nm1 nm2]
   (fn []
     (let [app (or (get-app nm1) (get-app nm2))]
-      (app:activate))))
+      (when app
+        (app:activate)))))
 
 (fn with-ax-hotfix [app f]
   (let [ax-app (hs.axuielement.applicationElement app)
