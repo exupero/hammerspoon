@@ -32,7 +32,7 @@
 
 (local VimMode (hs.loadSpoon :VimMode))
 (doto (VimMode:new)
-  (: :bindHotKeys {:enter [[] :escape]})
+  (: :bindHotKeys {:enter [[:ctrl] ";"]})
   (: :disableForApp :Obsidian)
   (: :disableForApp :iTerm2)
   (: :disableForApp :Terminal))
@@ -45,8 +45,10 @@
       (hs.reload)
       (lua :return))))
 
-(global watcher
-  (-> (hs.pathwatcher.new (.. (os.getenv "HOME") "/.hammerspoon/") reload-config)
+(fn reload-path [path]
+  (-> (hs.pathwatcher.new path reload-config)
       (: :start)))
-
+(global watchers
+  [(reload-path (.. (os.getenv "HOME") "/code/hammerspoon/"))
+   (reload-path (.. (os.getenv "HOME") "/code/dotfiles/hammerspoon/"))])
 (hs.alert.show "Config loaded")
