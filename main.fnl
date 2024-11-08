@@ -2,6 +2,21 @@
 (local arranging-mode (require :arrange))
 (local machine (require :machine))
 
+(fn reload-config [files]
+  (each [_ file (pairs files)]
+    (when (or (= ".lua" (file:sub -4))
+              (= ".fnl" (file:sub -4)))
+      (hs.console.clearConsole)
+      (hs.reload)
+      (lua :return))))
+
+(fn reload-path [path]
+  (-> (hs.pathwatcher.new path reload-config)
+      (: :start)))
+(global watchers
+  [(reload-path (.. (os.getenv "HOME") "/code/hammerspoon/"))
+   (reload-path (.. (os.getenv "HOME") "/code/dotfiles/hammerspoon/"))])
+
 (tset hs.window :animationDuration 0)
 (tset hs.hints :hintChars [:a :o :e :u :i "," "." :p :y :q :j :k :x])
 
@@ -37,18 +52,4 @@
   (: :disableForApp :iTerm2)
   (: :disableForApp :Terminal))
 
-(fn reload-config [files]
-  (each [_ file (pairs files)]
-    (when (or (= ".lua" (file:sub -4))
-              (= ".fnl" (file:sub -4)))
-      (hs.console.clearConsole)
-      (hs.reload)
-      (lua :return))))
-
-(fn reload-path [path]
-  (-> (hs.pathwatcher.new path reload-config)
-      (: :start)))
-(global watchers
-  [(reload-path (.. (os.getenv "HOME") "/code/hammerspoon/"))
-   (reload-path (.. (os.getenv "HOME") "/code/dotfiles/hammerspoon/"))])
 (hs.alert.show "Config loaded")
