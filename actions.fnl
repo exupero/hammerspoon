@@ -7,7 +7,7 @@
       (when (= nm (app:name))
         (lua "return app"))))
   ; if we can't find a window in the current space, look for an app anywhere
-  (hs.appfinder.appFromName nm))
+  (hs.application.get nm))
 
 (fn actions.activate [nm1 nm2]
   (let [app (or (get-app nm1) (get-app nm2))]
