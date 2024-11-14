@@ -14,7 +14,7 @@
     (when app
       (app:activate))))
 
-(fn with-ax-hotfix [app f]
+(fn actions.with-ax-hotfix [app f]
   (let [ax-app (hs.axuielement.applicationElement app)
         enhanced? ax-app.AXEnhancedUserInterface]
     (when enhanced?
@@ -23,14 +23,14 @@
     (when enhanced?
       (tset ax-app :AXEnhancedUserInterface true))))
 
+(fn actions.move-window-to [win quad]
+  (actions.with-ax-hotfix (win:application) #(win:moveToUnit quad)))
+
 (fn actions.move-to [quad]
-  (let [win (hs.window.focusedWindow)]
-    (with-ax-hotfix
-      (win:application)
-      #(win:moveToUnit quad))))
+  (actions.move-window-to (hs.window.focusedWindow) quad))
 
 (fn actions.move-window-to-next-screen [win]
-  (with-ax-hotfix
+  (actions.with-ax-hotfix
     (win:application)
     #(win:moveToScreen (: (win:screen) :next))))
 
