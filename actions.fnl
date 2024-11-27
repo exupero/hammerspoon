@@ -2,7 +2,7 @@
 
 (fn get-app [nm]
   ; actually just all windows in the current space
-  (each [_ win (pairs (hs.window.allWindows))]
+  (each [_ win (ipairs (hs.window.allWindows))]
     (let [app (win:application)]
       (when (= nm (app:name))
         (lua "return app"))))
