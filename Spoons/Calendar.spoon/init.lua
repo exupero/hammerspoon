@@ -68,8 +68,8 @@ function obj:init()
     local cres = cscreen:fullFrame()
 
     obj.canvas = hs.canvas.new({
-        x = cres.w-obj.calw-20,
-        y = cres.h-obj.calh-20,
+        x = 20,
+        y = 60,
         w = obj.calw,
         h = obj.calh
     }):show()
