@@ -49,12 +49,12 @@
 (KSheet:init)
 (KSheet:bindHotkeys {:toggle [hyper :k]})
 
-(local VimMode (hs.loadSpoon :VimMode))
-(doto (VimMode:new)
-  (: :bindHotKeys {:enter [[:ctrl] ";"]})
-  (: :disableForApp :Obsidian)
-  (: :disableForApp :iTerm2)
-  (: :disableForApp :Terminal))
+; (local VimMode (hs.loadSpoon :VimMode))
+; (doto (VimMode:new)
+;   (: :bindHotKeys {:enter [[:ctrl] ";"]})
+;   (: :disableForApp :Obsidian)
+;   (: :disableForApp :iTerm2)
+;   (: :disableForApp :Terminal))
 
 (local Calendar (hs.loadSpoon :Calendar))
 
