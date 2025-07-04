@@ -21,13 +21,30 @@
 (tset hs.hints :hintChars [:a :o :e :u :i "," "." :p :y :q :j :k :x])
 
 (arranging-mode.bind-keymap!
-  {"," #(actions.move-to {:x 0 :y 0 :w 0.5 :h 0.5})
+  {; left hand - halves
+     ; top quadrants
+   "," #(actions.move-to {:x 0 :y 0 :w 0.5 :h 0.5})
    "." #(actions.move-to {:x 0.5 :y 0 :w 0.5 :h 0.5})
+     ; full height
    :a #(arranging-mode:exit)
    :o #(actions.move-to hs.layout.left50)
+     ; bottom quadrants
    :e #(actions.move-to hs.layout.right50)
    :q #(actions.move-to {:x 0 :y 0.5 :w 0.5 :h 0.5})
-   :j #(actions.move-to {:x 0.5 :y 0.5 :w 0.5 :h 0.5})})
+   :j #(actions.move-to {:x 0.5 :y 0.5 :w 0.5 :h 0.5})
+   ; right hand - thirds
+     ; top sextants
+   :g #(actions.move-to {:x 0 :y 0 :w (/ 3) :h 0.5})
+   :c #(actions.move-to {:x (/ 3) :y 0 :w (/ 3) :h 0.5})
+   :r #(actions.move-to {:x (/ 2 3) :y 0 :w (/ 3) :h 0.5})
+     ; full height
+   :h #(actions.move-to {:x 0 :y 0 :w (/ 3) :h 1})
+   :t #(actions.move-to {:x (/ 3) :y 0 :w (/ 3) :h 1})
+   :n #(actions.move-to {:x (/ 2 3) :y 0 :w (/ 3) :h 1})
+     ; bottom sextants
+   :m #(actions.move-to {:x 0 :y 0.5 :w (/ 3) :h 0.5})
+   :w #(actions.move-to {:x (/ 3) :y 0.5 :w (/ 3) :h 0.5})
+   :v #(actions.move-to {:x (/ 2 3) :y 0.5 :w (/ 3) :h 0.5})})
 
 (local keymap
   {:a #(actions.toggle-mode arranging-mode)})
