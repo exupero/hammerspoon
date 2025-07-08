@@ -28,8 +28,9 @@
      ; full height
    :a #(arranging-mode:exit)
    :o #(actions.move-to hs.layout.left50)
-     ; bottom quadrants
    :e #(actions.move-to hs.layout.right50)
+   :i #(actions.move-to {:x 0.25 :y 0 :w 0.5 :h 1})
+     ; bottom quadrants
    :q #(actions.move-to {:x 0 :y 0.5 :w 0.5 :h 0.5})
    :j #(actions.move-to {:x 0.5 :y 0.5 :w 0.5 :h 0.5})
    ; right hand - thirds
