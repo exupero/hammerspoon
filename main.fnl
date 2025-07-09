@@ -30,6 +30,9 @@
    :o #(actions.move-to hs.layout.left50)
    :e #(actions.move-to hs.layout.right50)
    :i #(actions.move-to {:x 0.25 :y 0 :w 0.5 :h 1})
+     ; top and bottom middle halves
+   :y #(actions.move-to {:x 0.25 :y 0 :w 0.5 :h 0.5})
+   :k #(actions.move-to {:x 0.25 :y 0.5 :w 0.5 :h 0.5})
      ; bottom quadrants
    :q #(actions.move-to {:x 0 :y 0.5 :w 0.5 :h 0.5})
    :j #(actions.move-to {:x 0.5 :y 0.5 :w 0.5 :h 0.5})
