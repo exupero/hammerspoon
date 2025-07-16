@@ -24,7 +24,10 @@
       (tset ax-app :AXEnhancedUserInterface true))))
 
 (fn actions.move-window-to [win quad]
-  (actions.with-ax-hotfix (win:application) #(win:moveToUnit quad)))
+  (let [app (win:application)]
+    (if app
+      (actions.with-ax-hotfix app #(win:moveToUnit quad))
+      (win:moveToUnit quad))))
 
 (fn actions.move-to [quad]
   (actions.move-window-to (hs.window.focusedWindow) quad))
