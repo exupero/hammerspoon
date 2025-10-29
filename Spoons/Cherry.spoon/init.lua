@@ -31,8 +31,8 @@ obj.alertDuration = 5
 obj.alertTextSize = 80
 
 -- set to nil to turn off notification when time's up or provide a hs.notify notification
-obj.notification = nil
--- obj.notification = hs.notify.new({ title = "Done! 🍒", withdrawAfter = 0})
+-- obj.notification = nil
+obj.notification = hs.notify.new({ title = "Done! 🍒", withdrawAfter = 0})
 
 -- set to nil to turn off notification sound when time's up or provide a hs.sound
 obj.sound = nil
