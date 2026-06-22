@@ -77,6 +77,6 @@
 ;   (: :disableForApp :iTerm2)
 ;   (: :disableForApp :Terminal))
 
-(local Calendar (hs.loadSpoon :Calendar))
+; (local Calendar (hs.loadSpoon :Calendar))
 
 (hs.alert.show "Config loaded")
