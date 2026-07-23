@@ -140,6 +140,7 @@ function obj:start(resume)
      self:updateTimerString()
   end
   self.timerRunning = true
+  if self.timer then self.timer:stop() end
   self.timer = hs.timer.doWhile(function() return self.timerRunning end, function() self:tick() end, 1)
   local items = {
     { title = "Stop",  fn = function() self:reset() end },
