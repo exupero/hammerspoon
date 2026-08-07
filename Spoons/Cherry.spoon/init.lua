@@ -141,6 +141,7 @@ function obj:start(resume)
   end
   self.timerRunning = true
   if self.timer then self.timer:stop() end
+  if self.notification and self.notification:delivered() then self.notification:withdraw() end
   self.timer = hs.timer.doWhile(function() return self.timerRunning end, function() self:tick() end, 1)
   local items = {
     { title = "Stop",  fn = function() self:reset() end },
